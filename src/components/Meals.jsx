@@ -9,8 +9,12 @@ export default function Meals() {
     error,
   } = useHttp("http://localhost:3000/meals" , requestConfig , []);
   if(isLoading){
-    return <p>Fetching Meals..</p>
+    return <p className="center">Fetching Meals..</p>
   }
+  if(error){
+    return <Error title="Failed to  Fetch meals" message={error} />
+  }
+  console.log(loadedMeals)
   return (
     <ul id="meals">
       {loadedMeals.map((meal) => (
