@@ -21,6 +21,7 @@ export default function Checkout() {
     isLoading: isSending,
     error,
     sendRequest,
+    clearData,
   } = useHttp("http://localhost:3000/orders", requestConfig);
 
   const cartTotal = cartCtx.items.reduce((totalPrice, item) => {
@@ -30,9 +31,10 @@ export default function Checkout() {
     userProgressCtx.hideCheckout();
   }
 
-  function handleFinish(){
+  function handleFinish() {
     userProgressCtx.hideCheckout();
     cartCtx.clearCart();
+    clearData();
   }
   function handleSubmit(event) {
     event.preventDefault();
@@ -67,7 +69,7 @@ export default function Checkout() {
         <h2>Success</h2>
         <p>Yoru Order was submitted successfully</p>
         <p className="modal-actions">
-            <Button onClick ={handleFinish}>Okay</Button>
+          <Button onClick={handleFinish}>Okay</Button>
         </p>
       </Modal>
     );
